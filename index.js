@@ -12,6 +12,8 @@ const MyForm = {
         field.classList.add("error");
         result.isValid = false;
         result.errorFields.push(field.name);
+      } else {
+        field.classList.remove("error");
       }
     });
     console.log(result);
