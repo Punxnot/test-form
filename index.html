@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Yandex test</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <form class="my-form" id="myForm" action="echo" onsubmit="event.preventDefault(); MyForm.submit();">
+      <label>ФИО<input type="text" name="fio" id="fio"></label>
+      <label>Email<input type="email" name="email" id="email"></label>
+      <label>Телефон<input type="tel" name="phone" id="phone" maxlength="16"></label>
+      <button type="submit" id="submitButton">Отправить</button>
+    </form>
+
+    <div id="resultContainer"></div>
+
+    <script src="index.js"></script>
+  </body>
+</html>

@@ -1,0 +1,29 @@
+body {
+  margin: 0;
+  padding: 0;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+.my-form {
+  width: 300px;
+  margin: 20px auto;
+  padding: 20px;
+  border: 1px solid #e5e5e5;
+}
+
+.my-form label {
+  display: block;
+  margin-bottom: 20px;
+}
+
+.my-form input {
+  margin-left: 10px;
+}
+
+.my-form input.error {
+  border: 1px solid red;
+}
