@@ -1,13 +1,13 @@
-const myForm = document.getElementById("myForm");
+const mainForm = document.getElementById("mainForm");
 const fio = document.getElementById("fio");
 const email = document.getElementById("email");
 const phone = document.getElementById("phone");
+const mainFormFields = document.querySelectorAll("#mainForm input");
 
 const MyForm = {
   validate: () => {
     let result = {isValid: true, errorFields: []};
-    let myFormFields = document.querySelectorAll("#myForm input");
-    [...myFormFields].forEach((field) => {
+    [...mainFormFields].forEach((field) => {
       if (!validateField(field)) {
         field.classList.add("error");
         result.isValid = false;
@@ -25,11 +25,16 @@ const MyForm = {
     }
   },
   setData: (obj) => {
-    // TODO: set inputs values
+    const settableFields = ["phone", "fio", "email"];
+    for (let key of Object.keys(obj)) {
+      if (settableFields.includes(key)) {
+        document.getElementById(key).value = obj[key];
+      }
+    }
   },
   submit: () => {
     if (MyForm.validate().isValid) {
-      myForm.submit();
+      mainForm.submit();
     }
   }
 };
@@ -86,20 +91,3 @@ const validatePhone = (str) => {
   // Sum of all digits <= 30
   return isValidTel && sumDigits(str) <= 30;
 };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// pattern="^([\S]+)\s([\S]+)\s([\S]+)"
-// pattern="^[^@\s]+@yahoo.com$"
