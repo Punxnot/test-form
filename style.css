@@ -27,3 +27,14 @@ ol {
 .my-form input.error {
   border: 1px solid red;
 }
+
+.btn {
+  padding: 10px 20px;
+  background-color: blue;
+  color: white;
+  cursor: pointer;
+}
+
+.btn:disabled {
+  opacity: 0.3;
+}

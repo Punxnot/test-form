@@ -1,13 +1,19 @@
-const mainForm = document.getElementById("mainForm");
+const myForm = document.getElementById("myForm");
 const fio = document.getElementById("fio");
 const email = document.getElementById("email");
 const phone = document.getElementById("phone");
-const mainFormFields = document.querySelectorAll("#mainForm input");
+const submitButton = document.getElementById("submitButton");
+const resultContainer = document.getElementById("resultContainer");
+const myFormFields = document.querySelectorAll("#myForm input");
+
+const domains = ["ya.ru", "yandex.ru", "yandex.ua", "yandex.by", "yandex.kz", "yandex.com"];
+const settableFields = ["phone", "fio", "email"];
+const maxPhoneSum = 30;
 
 const MyForm = {
   validate: () => {
     let result = {isValid: true, errorFields: []};
-    [...mainFormFields].forEach((field) => {
+    [...myFormFields].forEach((field) => {
       if (!validateField(field)) {
         field.classList.add("error");
         result.isValid = false;
@@ -27,7 +33,6 @@ const MyForm = {
     }
   },
   setData: (obj) => {
-    const settableFields = ["phone", "fio", "email"];
     for (let key of Object.keys(obj)) {
       if (settableFields.includes(key)) {
         document.getElementById(key).value = obj[key];
@@ -36,7 +41,22 @@ const MyForm = {
   },
   submit: () => {
     if (MyForm.validate().isValid) {
-      mainForm.submit();
+      submitButton.disabled = true;
+      return new Promise((resolve, reject) => {
+        // It is not possible to send XMLHttpRequests to local file,
+        // you'd need to run a server to access these files
+        // so for sake of testing we'll just read data from our sample response files (randomly)
+        // Included timeout to simulate waiting for server response
+        setTimeout(() => {
+          const statuses = [successData, errorData];
+          let randomStatus = statuses[Math.floor(Math.random()*statuses.length)];
+          let response = JSON.parse(randomStatus);
+          resolve(response[0].status);
+        }, 2000);
+      }).then((result) => {
+        resultContainer.textContent = result;
+        submitButton.disabled = false;
+      });
     }
   }
 };
@@ -65,7 +85,6 @@ const validateFIO = (str) => {
 
 const validateEmail = (str) => {
   // ya.ru, yandex.ru, yandex.ua, yandex.by, yandex.kz, yandex.com
-  const domains = ["ya.ru", "yandex.ru", "yandex.ua", "yandex.by", "yandex.kz", "yandex.com"];
   let strParts = str.split("@");
   if (strParts.length > 2) {
     return false;
@@ -91,5 +110,5 @@ const validatePhone = (str) => {
   let patt = new RegExp(/^\+7\(([0-9]{3})\)([0-9]{3})-([0-9]{2})-([0-9]{2})$/);
   let isValidTel = patt.test(str);
   // Sum of all digits <= 30
-  return isValidTel && sumDigits(str) <= 30;
+  return isValidTel && sumDigits(str) <= maxPhoneSum;
 };

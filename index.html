@@ -6,14 +6,20 @@
     <link rel="stylesheet" href="style.css">
   </head>
   <body>
-    <form class="my-form" id="mainForm" action="echo" onsubmit="event.preventDefault(); MyForm.submit();">
+    <form class="my-form" id="myForm" action="" method="post" onsubmit="event.preventDefault(); MyForm.submit();">
       <label>ФИО<input type="text" name="fio" id="fio"></label>
       <label>Email<input type="email" name="email" id="email"></label>
       <label>Телефон<input type="tel" name="phone" id="phone" maxlength="16"></label>
-      <button type="submit" id="submitButton">Отправить</button>
+      <button class="btn" type="submit" id="submitButton">Отправить</button>
     </form>
 
-    <div id="resultContainer"></div>
+    <div id="resultContainer">
+
+    </div>
+
+    <!-- Sample json responses -->
+    <script type="text/javascript" src="sample-responses/success.json"></script>
+    <script type="text/javascript" src="sample-responses/error.json"></script>
 
     <script src="index.js"></script>
   </body>
