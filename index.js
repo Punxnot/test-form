@@ -1,9 +1,9 @@
-const myForm = document.getElementById("myForm");
 const fio = document.getElementById("fio");
 const email = document.getElementById("email");
 const phone = document.getElementById("phone");
 const submitButton = document.getElementById("submitButton");
 const resultContainer = document.getElementById("resultContainer");
+const loader = document.getElementById("loader");
 const myFormFields = document.querySelectorAll("#myForm input");
 
 const domains = ["ya.ru", "yandex.ru", "yandex.ua", "yandex.by", "yandex.kz", "yandex.com"];
@@ -42,20 +42,20 @@ const MyForm = {
   submit: () => {
     if (MyForm.validate().isValid) {
       submitButton.disabled = true;
+      loader.classList.remove("hidden");
       return new Promise((resolve, reject) => {
         // It is not possible to send XMLHttpRequests to local file,
-        // you'd need to run a server to access these files
-        // so for sake of testing we'll just read data from our sample response files (randomly)
-        // Included timeout to simulate waiting for server response
+        // so for testing we randomly retrieve sample data
         setTimeout(() => {
           const statuses = [successData, errorData];
           let randomStatus = statuses[Math.floor(Math.random()*statuses.length)];
           let response = JSON.parse(randomStatus);
           resolve(response[0].status);
-        }, 2000);
+        }, 1000);
       }).then((result) => {
         resultContainer.textContent = result;
         submitButton.disabled = false;
+        loader.classList.add("hidden");
       });
     }
   }

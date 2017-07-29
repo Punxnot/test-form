@@ -1,6 +1,7 @@
 body {
   margin: 0;
   padding: 0;
+  font-family: Arial, sans-serif;
 }
 
 ul,
@@ -8,20 +9,28 @@ ol {
   list-style: none;
 }
 
-.my-form {
+.my-form,
+.display {
+  box-sizing: border-box;
   width: 300px;
+  min-height: 65px;
   margin: 20px auto;
   padding: 20px;
-  border: 1px solid #e5e5e5;
+  border: 1px solid #e6e6e6;;
 }
 
 .my-form label {
-  display: block;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   margin-bottom: 20px;
 }
 
 .my-form input {
+  height: 20px;
   margin-left: 10px;
+  padding: 0 10px;
+  border: 1px solid #e6e6e6;
 }
 
 .my-form input.error {
@@ -30,11 +39,45 @@ ol {
 
 .btn {
   padding: 10px 20px;
-  background-color: blue;
+  background-color: #000000;
   color: white;
+  outline: none;
+  border: none;
+  box-shadow: none;
+  font-size: 14px;
   cursor: pointer;
 }
 
 .btn:disabled {
   opacity: 0.3;
+  cursor: auto;
+  pointer-events: none;
+}
+
+.display {
+  font-size: 20px;
+}
+
+.loader {
+  box-sizing: border-box;
+  border: 4px solid #e6e6e6;
+  border-top: 4px solid #000000;
+  border-radius: 50%;
+  width: 23px;
+  height: 23px;
+  margin: 0 auto;
+  animation: spin 1s linear infinite;
+}
+
+.hidden {
+  display: none;
+}
+
+.loader:not(.hidden) + .result-container {
+  display: none;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }

@@ -1,20 +1,21 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Yandex test</title>
+    <title>Тест для Школы Node.js</title>
     <meta charset="utf-8">
     <link rel="stylesheet" href="style.css">
   </head>
   <body>
     <form class="my-form" id="myForm" action="" method="post" onsubmit="event.preventDefault(); MyForm.submit();">
-      <label>ФИО<input type="text" name="fio" id="fio"></label>
-      <label>Email<input type="email" name="email" id="email"></label>
-      <label>Телефон<input type="tel" name="phone" id="phone" maxlength="16"></label>
+      <label><span>ФИО</span><input type="text" name="fio" id="fio"></label>
+      <label><span>Email</span><input type="email" name="email" id="email"></label>
+      <label><span>Телефон</span><input type="tel" name="phone" id="phone" maxlength="16"></label>
       <button class="btn" type="submit" id="submitButton">Отправить</button>
     </form>
 
-    <div id="resultContainer">
-
+    <div class="display">
+      <div class="loader hidden" id="loader"></div>
+      <div id="resultContainer" class="result-container"></div>
     </div>
 
     <!-- Sample json responses -->
