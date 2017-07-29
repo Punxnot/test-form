@@ -47,17 +47,32 @@ const MyForm = {
         // It is not possible to send XMLHttpRequests to local file,
         // so for testing we randomly retrieve sample data
         setTimeout(() => {
-          const statuses = [successData, errorData];
+          const statuses = [successData, errorData, progressData];
           let randomStatus = statuses[Math.floor(Math.random()*statuses.length)];
           let response = JSON.parse(randomStatus);
-          resolve(response[0].status);
+          resolve(response[0]);
         }, 1000);
       }).then((result) => {
-        resultContainer.textContent = result;
+        resultContainer.className = "result-container";
         submitButton.disabled = false;
         loader.classList.add("hidden");
+        handleResults(result, resultContainer);
       });
     }
+  }
+};
+
+const handleResults = (result, container) => {
+  container.classList.add(result.status);
+  if (result.status === "success") {
+    container.textContent = "Success";
+  } else if (result.status === "error") {
+    container.textContent = result.reason;
+  } else {
+    container.textContent = "Посылаю повторный запрос...";
+    setTimeout(() => {
+      MyForm.submit();
+    }, result.timeout);
   }
 };
 
